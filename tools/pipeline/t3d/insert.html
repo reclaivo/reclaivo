@@ -1,0 +1,65 @@
+<!doctype html><meta charset="utf-8">
+<style>html,body{margin:0;background:transparent}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+import {SVGLoader} from 'three/addons/loaders/SVGLoader.js';
+const R=new URLSearchParams(location.search).get('r');let K=R;
+const CF=await (await fetch('/cut_'+R+'.json')).json();if(CF.kind)K=CF.kind;
+const logoSvg=await (await fetch('/logo.svg')).text();
+const W=1080,H=1920,LIME=0xDEFB0A;
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
+renderer.setSize(W,H);renderer.setPixelRatio(1);renderer.setClearColor(0x000000,0);renderer.toneMapping=THREE.ACESFilmicToneMapping;
+document.body.appendChild(renderer.domElement);
+const scene=new THREE.Scene();
+const pm=new THREE.PMREMGenerator(renderer);scene.environment=pm.fromScene(new RoomEnvironment(),0.04).texture;scene.environmentIntensity=0.55;
+const cam=new THREE.PerspectiveCamera(38,W/H,0.1,60);cam.position.set(0,0,10);cam.lookAt(0,0,0);
+scene.add(new THREE.AmbientLight(0xffffff,0.25));
+const key=new THREE.DirectionalLight(0xffffff,1.1);key.position.set(-3,4,6);scene.add(key);
+const l1=new THREE.PointLight(LIME,14,0,2);l1.position.set(-2.4,1.8,3);scene.add(l1);
+const l2=new THREE.PointLight(0xffffff,10,0,2);l2.position.set(2.6,2.4,3.5);scene.add(l2);
+function rr(w,h,r){const s=new THREE.Shape(),x=-w/2,y=-h/2;s.moveTo(x+r,y);s.lineTo(x+w-r,y);s.quadraticCurveTo(x+w,y,x+w,y+r);s.lineTo(x+w,y+h-r);s.quadraticCurveTo(x+w,y+h,x+w-r,y+h);s.lineTo(x+r,y+h);s.quadraticCurveTo(x,y+h,x,y+h-r);s.lineTo(x,y+r);s.quadraticCurveTo(x,y,x+r,y);return s}
+const bev={bevelEnabled:true,bevelThickness:0.05,bevelSize:0.05,bevelSegments:6,curveSegments:24};
+const limeM=(e)=>new THREE.MeshStandardMaterial({color:LIME,emissive:LIME,emissiveIntensity:e,roughness:0.3});
+const darkM=new THREE.MeshPhysicalMaterial({color:0x242f06,roughness:0.18,metalness:0.55,clearcoat:1,clearcoatRoughness:0.05,envMapIntensity:1.5});
+const P={};
+// contracts
+const ticks=[];
+{const g=new THREE.Group();
+ for(let i=0;i<3;i++){const pg=new THREE.Group();
+  pg.add(new THREE.Mesh(new THREE.ExtrudeGeometry(rr(0.95,1.25,0.07),{...bev,depth:0.05,bevelSize:0.02,bevelThickness:0.02}),darkM));
+  for(let k=0;k<3;k++){const ln=new THREE.Mesh(new THREE.BoxGeometry(0.5-(k%2)*0.15,0.035,0.02),new THREE.MeshStandardMaterial({color:0xd9dccb,roughness:0.5}));ln.position.set(-0.1,0.3-k*0.14,0.09);pg.add(ln)}
+  const cu=new THREE.CurvePath();cu.add(new THREE.LineCurve3(new THREE.Vector3(-0.2,0,0),new THREE.Vector3(-0.07,-0.14,0)));cu.add(new THREE.LineCurve3(new THREE.Vector3(-0.07,-0.14,0),new THREE.Vector3(0.22,0.2,0)));
+  const tk=new THREE.Mesh(new THREE.TubeGeometry(cu,24,0.07,12,false),limeM(1.4));tk.position.set(0,-0.36,0.14);tk.scale.setScalar(0.001);pg.add(tk);ticks.push(tk);
+  pg.position.set((i-1)*1.05,(i===1?0.12:0),(i===1?0.35:0));pg.rotation.y=(1-i)*0.2;pg.rotation.z=(i-1)*-0.05;g.add(pg)}
+ g.position.set(0,0.97,0);P.contracts=g;scene.add(g)}
+// strip
+const clips=[];let hl;
+{const g=new THREE.Group();
+ for(let i=0;i<4;i++){const m=new THREE.Mesh(new THREE.ExtrudeGeometry(rr(0.66,0.5,0.1),{...bev,depth:0.1,bevelSize:0.02,bevelThickness:0.02}),darkM);m.userData.x=(i-1.5)*0.7;g.add(m);clips.push(m)}
+ hl=new THREE.Mesh(new THREE.ExtrudeGeometry(rr(0.5,0.34,0.07),{...bev,depth:0.05,bevelSize:0.01,bevelThickness:0.01}),limeM(1.2));hl.position.z=0.12;hl.scale.setScalar(0.001);clips[1].add(hl);
+ g.position.set(0,0.97,0);g.scale.setScalar(1.0);P.strip=g;scene.add(g)}
+// logo tile
+{const g=new THREE.Group();
+ const tile=new THREE.Mesh(new THREE.ExtrudeGeometry(rr(1.5,1.5,0.38),{...bev,depth:0.2,bevelSize:0.05,bevelThickness:0.05}),new THREE.MeshStandardMaterial({color:0xDEFB0A,roughness:0.34,metalness:0.1,emissive:0xDEFB0A,emissiveIntensity:0.12}));tile.position.z=-0.1;g.add(tile);
+ const svg=new SVGLoader().parse(logoSvg);const rg=new THREE.Group();
+ svg.paths.forEach(p=>{SVGLoader.createShapes(p).forEach(sh=>{rg.add(new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:50,bevelEnabled:true,bevelThickness:5,bevelSize:4,bevelSegments:4}),new THREE.MeshStandardMaterial({color:0x0b0b0b,roughness:0.3,metalness:0.3})))})});
+ const sc=0.0023;rg.scale.set(sc,-sc,sc);rg.position.set(-214*sc,217*sc,0.16);g.add(rg);
+ const w=new THREE.Group();w.add(g);w.scale.setScalar(0.64);w.position.set(0,1.3,0);P.logo=w;scene.add(w)}
+const cl=x=>Math.min(1,Math.max(0,x)),ease=x=>1-Math.pow(1-x,3),back=x=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+window.setT=function(t){
+ const in3=t>=CF.c3[0]&&t<CF.c3[1],in6=t>=CF.c6[0]&&t<CF.c6[1];
+ const t3=t-CF.c3[0],t6=t-CF.c6[0];
+ P.contracts.visible=in3&&K==='A';P.strip.visible=in3&&K==='B';P.logo.visible=in6;
+ if(in3){const s=Math.max(0.001,back(cl(t3/0.4)));
+  if(K==='A'){P.contracts.scale.setScalar(s*0.9);P.contracts.rotation.y=Math.sin(t*0.9)*0.22;P.contracts.position.y=0.97+Math.sin(t*1.3)*0.05;
+    CF.ticks.forEach((tt,i)=>{ticks[i].scale.setScalar(Math.max(0.001,1.5*back(cl((t-tt)/0.3))))})}
+  else{P.strip.scale.setScalar(1.0*s);const sp=ease(cl((t-CF.splitT)/0.5));
+    clips.forEach((m,i)=>{m.position.x=m.userData.x*(1+0.3*sp);m.position.y=(i===1?0.35*sp:0)+Math.sin(t*1.4+i)*0.04*sp;m.rotation.z=(i-1.5)*-0.06*sp;m.rotation.y=Math.sin(t+i)*0.12});
+    hl.scale.setScalar(Math.max(0.001,back(cl((t-CF.splitT-0.3)/0.3))));P.strip.rotation.y=Math.sin(t*0.8)*0.18;P.strip.position.y=0.97+Math.sin(t*1.2)*0.05}}
+ if(in6){const s=Math.max(0.001,back(cl(t6/0.45)));P.logo.scale.setScalar(0.64*s);P.logo.rotation.y=0.55*Math.exp(-t6*2.2)*Math.cos(t6*5)+Math.sin(t*1.1)*0.14;P.logo.rotation.x=Math.sin(t*0.9)*0.06;P.logo.position.y=1.3+Math.sin(t*1.5)*0.04}
+ renderer.render(scene,cam);
+};
+window.ready=true;
+</script>

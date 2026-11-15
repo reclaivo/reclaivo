@@ -1,0 +1,22 @@
+{
+ "note": "Every reel ever made. New reels must have a different hook, topic and wording from all of these. Reuse an old one only if truly out of ideas.",
+ "reels": [
+  {"id":"A","topic":"3 gaps that break influencer deals","kind":"edu"},
+  {"id":"B","topic":"clipping fixes zero views","kind":"edu"},
+  {"id":"C","topic":"ghosting after a deal","kind":"edu"},
+  {"id":"D","topic":"turn long video into clips","kind":"edu"},
+  {"id":"E1","topic":"hook: first 3 seconds","kind":"edu"},
+  {"id":"E2","topic":"short pitches get replies","kind":"edu"},
+  {"id":"E3","topic":"Reclaivo matches brands and creators","kind":"promo"},
+  {"id":"E4","topic":"short clips win","kind":"edu"},
+  {"id":"E5","topic":"price the work itself","kind":"edu"},
+  {"id":"E6","topic":"one post is rarely enough","kind":"edu"},
+  {"id":"E7","topic":"Reclaivo cuts short clips","kind":"promo"},
+  {"id":"E8","topic":"unclear scope causes trouble","kind":"edu"},
+  {"id":"E9","topic":"captions for sound off","kind":"edu"},
+  {"id":"E10","topic":"Reclaivo works with creators","kind":"promo"},
+  {"id":"E11","topic":"followers alone mislead","kind":"edu"},
+  {"id":"E12","topic":"crop wide video for phones","kind":"edu"},
+  {"id":"E13","topic":"your last second matters (ending/CTA)","kind":"edu"}
+ ]
+}
