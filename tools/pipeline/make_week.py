@@ -13,6 +13,7 @@ def dur(f): return float(sh(f'ffprobe -v error -show_entries format=duration -of
 # 0. validation of spec
 for n,r in S.items():
     assert r['k'] in 'PAB' and len(r['L'])==7 and len(r['bg'])==5, n
+    assert len(r['L'][1].replace('Reclaivo','Re clay vee oh').split())<=7 and len(r['L'][1].split())<=5, n+': line 2 (big stamp) must be max 5 words'
     for l in r['L']: assert '—' not in l and '–' not in l, n
 sh(f'python3 /tmp/vid5/patch7.py {spec}')
 srv=None
