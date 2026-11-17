@@ -40,3 +40,12 @@ make_week.py already makes frame 0 the designed cover (hook fully shown) via add
 
 ## Saturday check
 - Confirm Friday's reels were built and scheduled (tools/schedule.md plus the repo). If not, run the missing part now.
+
+
+## New styles (added 17 Nov 2026): Glass Icons and Software Walkthrough
+Both are in tools/pipeline/styles/ (examples in reels/examples/). The user approved the look and wants Glass Icons used MORE OFTEN from the next batch, Software Walkthrough occasionally. Data City is NOT used.
+- Palette is the Reclaivo palette only: #0B0B0B, lime #DEFB0A, white, greys #cfd2c4 and #9fa391. Keep the top (about 250 px) and bottom (about 450 px) clear: the page content already sits inside a scaled #stage, do not change it.
+- Glass Icons: "N things every deal/clip needs" style. 4 icons, each with a card (number, name, one-line benefit). Edit the headline in #hl, the CARD array and the symbols (sym(k)) in glass.html. Lines: hook, 4 beats, Comment DEAL/CLIP below, Follow line.
+- Software Walkthrough: 4 click steps in a mock "Deal board" (generic, not a real product). Edit #hl, the NAMES array, TXT (typed message), rows and the 4 beats in walk.html.
+- Run: python3 tools/pipeline/styles/make_style.py glass|walk WORKDIR OUT.mp4 (WORKDIR/lines.json holds the 7 spoken lines). It does voice, sound, music, render, compose, cover frame 0 and refuses over 15 s.
+- Mix per batch: about 1 in 3 reels Glass Icons, 1 in 8 Software Walkthrough, the rest the 2D template. Topics stay unique, only IMA and clipping, no made-up stats, no country names. Words missing from the Kokoro lexicon are skipped (OOV list printed): reword them.

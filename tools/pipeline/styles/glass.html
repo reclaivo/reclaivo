@@ -1,0 +1,113 @@
+<!doctype html><meta charset="utf-8">
+<style>
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;font-family:Inter,sans-serif}
+body{background:#0B0B0B}
+#bg{position:absolute;inset:0}
+#stage{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:0 0;transform:translate(97px,181px) scale(0.82)}
+canvas{position:absolute;left:0;top:0;display:block}
+#brand{position:absolute;top:84px;left:0;width:1080px;text-align:center;font:700 34px Inter;letter-spacing:6px;color:#fff;opacity:.85}
+#brand b{display:inline-block;width:16px;height:16px;border-radius:50%;background:#DEFB0A;margin-right:14px;vertical-align:middle}
+#hl{position:absolute;top:150px;left:60px;width:960px;text-align:center;font:400 168px/0.98 Anton;color:#fff;text-transform:uppercase}
+#hl span{display:block}
+#hl .n{font-size:240px;line-height:.9;color:#DEFB0A}
+#card{position:absolute;left:90px;width:900px;top:930px;height:340px;border-radius:56px;background:rgba(6,6,6,.78);border:3px solid rgba(222,251,10,.55);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px rgba(222,251,10,.16);backdrop-filter:blur(26px);padding:44px 56px;box-sizing:border-box;opacity:0}
+#card .no{font:700 34px 'DejaVu Sans Mono',monospace;color:#DEFB0A;letter-spacing:4px}
+#card .nm{font:400 118px/1 Anton;color:#0b0b0d;text-transform:uppercase;margin-top:6px;color:#fff}
+#card .ds{font:600 38px/1.2 Inter;color:#cfd2c4;margin-top:14px}
+#cta{position:absolute;left:90px;width:900px;top:1010px;opacity:0;text-align:center}
+#cta .c{display:inline-block;background:#DEFB0A;color:#0B0B0B;font:400 112px/1 Anton;text-transform:uppercase;padding:34px 56px 30px;border-radius:44px}
+#cta .c em{font-style:normal;color:#0B0B0B;text-decoration:underline;text-decoration-thickness:8px}
+#fol{position:absolute;left:90px;width:900px;top:1000px;opacity:0;text-align:center}
+#fol .p{display:inline-block;background:#DEFB0A;color:#0b0b0d;font:400 104px/1 Anton;text-transform:uppercase;padding:30px 70px 26px;border-radius:999px}
+#fol .m{font:700 46px Inter;color:#fff;margin-top:34px}
+#fol .m2{font:600 40px Inter;color:#9fa391;margin-top:10px}
+</style>
+<div id="bg"></div>
+<div id="stage"><div id="brand"><b></b>RECLAIVO</div>
+<div id="hl"><span class="n">4</span><span>things every<br>deal needs</span></div>
+<div id="card"><div class="no" id="cno"></div><div class="nm" id="cnm"></div><div class="ds" id="cds"></div></div>
+<div id="cta"><span class="c">Comment <em>DEAL</em> below</span></div>
+<div id="fol"><div class="p">Follow</div><div class="m">then DM us or email us</div><div class="m2">hello@reclaivo.com</div></div>
+</div>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+const TL=(await (await fetch('/glass_tl.json')).json()).tl;
+const W=1080,H=1920;
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
+renderer.setSize(W,H);renderer.setPixelRatio(1);renderer.setClearColor(0x000000,0);renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+document.getElementById('stage').insertBefore(renderer.domElement,document.getElementById('brand'));
+const scene=new THREE.Scene();
+const pm=new THREE.PMREMGenerator(renderer);scene.environment=pm.fromScene(new RoomEnvironment(),0.04).texture;scene.environmentIntensity=0.45;
+const cam=new THREE.PerspectiveCamera(30,W/H,0.1,60);cam.position.set(0,0,14);cam.lookAt(0,0,0);
+scene.add(new THREE.AmbientLight(0xffffff,0.25));
+const key=new THREE.DirectionalLight(0xffffff,0.9);key.position.set(-3,4,6);scene.add(key);
+const pl=[[0xDEFB0A,-3,2,4],[0xffffff,3,-1,4],[0xDEFB0A,0,-3,5]];
+pl.forEach(([c,x,y,z])=>{const l=new THREE.PointLight(c,14,0,2);l.position.set(x,y,z);scene.add(l)});
+function rr(w,h,r){const s=new THREE.Shape(),x=-w/2,y=-h/2;s.moveTo(x+r,y);s.lineTo(x+w-r,y);s.quadraticCurveTo(x+w,y,x+w,y+r);s.lineTo(x+w,y+h-r);s.quadraticCurveTo(x+w,y+h,x+w-r,y+h);s.lineTo(x+r,y+h);s.quadraticCurveTo(x,y+h,x,y+h-r);s.lineTo(x,y+r);s.quadraticCurveTo(x,y,x+r,y);return s}
+const geo=new THREE.ExtrudeGeometry(rr(1.5,1.5,0.38),{depth:0.28,bevelEnabled:true,bevelThickness:0.1,bevelSize:0.1,bevelSegments:10,curveSegments:32});geo.translate(0,0,-0.14);
+function sym(k){const c=document.createElement('canvas');c.width=c.height=512;const g=c.getContext('2d');g.translate(256,256);const SC=['#0B0B0B','#0B0B0B','#DEFB0A','#0B0B0B'][k];g.strokeStyle=SC;g.fillStyle=SC;g.lineWidth=26;g.lineCap='round';g.lineJoin='round';g.shadowColor='rgba(0,0,0,.25)';g.shadowBlur=18;g.shadowOffsetY=8;
+ if(k==0){ // brief: page with lines
+  g.beginPath();g.roundRect(-120,-160,240,320,30);g.stroke();[-70,-10,50].forEach(y=>{g.beginPath();g.moveTo(-70,y);g.lineTo(70,y);g.stroke()});g.beginPath();g.moveTo(-70,100);g.lineTo(0,100);g.stroke()}
+ if(k==1){ // contract: page + check
+  g.beginPath();g.roundRect(-120,-160,240,320,30);g.stroke();g.beginPath();g.moveTo(-60,10);g.lineTo(-15,60);g.lineTo(65,-50);g.stroke();g.beginPath();g.moveTo(-70,-90);g.lineTo(30,-90);g.stroke()}
+ if(k==2){ // due dates: calendar
+  g.beginPath();g.roundRect(-150,-130,300,270,34);g.stroke();g.beginPath();g.moveTo(-150,-50);g.lineTo(150,-50);g.stroke();g.beginPath();g.moveTo(-70,-170);g.lineTo(-70,-100);g.stroke();g.beginPath();g.moveTo(70,-170);g.lineTo(70,-100);g.stroke();[[-70,10],[0,10],[70,10],[-70,80],[0,80]].forEach(([x,y])=>{g.beginPath();g.arc(x,y,13,0,7);g.fill()})}
+ if(k==3){ // payment: coin with arrow
+  g.beginPath();g.arc(0,0,140,0,7);g.stroke();g.beginPath();g.moveTo(-50,5);g.lineTo(-5,50);g.lineTo(65,-45);g.stroke()}
+ const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;return t}
+const COL=[0xDEFB0A,0xf1f3e6,0x1b1e10,0x8c917c];
+const ICON=[];
+COL.forEach((col,i)=>{
+ const mat=new THREE.MeshPhysicalMaterial({color:col,roughness:0.1,metalness:0,clearcoat:1,clearcoatRoughness:0.04,transparent:true,envMapIntensity:1.0});
+ const m=new THREE.Mesh(geo,mat);
+ const sm=new THREE.MeshBasicMaterial({map:sym(i),transparent:true,depthWrite:false});
+ const s=new THREE.Mesh(new THREE.PlaneGeometry(1.2,1.2),sm);s.position.z=0.27;m.add(s);
+ const g=new THREE.Group();g.add(m);scene.add(g);ICON.push({g,m,mat,sm})});
+const E=(a,b,x)=>{const t=Math.min(1,Math.max(0,(x-a)/(b-a)));return t*t*(3-2*t)};
+const Eb=(a,b,x)=>{const t=Math.min(1,Math.max(0,(x-a)/(b-a)));const c=1.70158*1.4;return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2)};
+const STACK=[[-0.85,-0.2,-0.5,-0.25,0.35],[0.9,-0.5,0.3,0.2,-0.3],[-0.75,-1.35,0.6,-0.18,-0.25],[0.85,-1.8,-0.2,0.25,0.3]]; // x,y,z,rotZ,rotY
+const ROWX=[-1.62,-0.54,0.54,1.62];
+const ROWY=-1.85, ROWS=0.42;
+const FOC={x:0,y:1.1,z:2.4,s:0.85};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const CARD=[['01','Clear brief','Say exactly what to post and when.'],['02','Signed contract','Write the terms down before work starts.'],['03','Due dates','Agree dates for drafts and for posting.'],['04','Payment terms','Set when and how the creator gets paid.']];
+const $=id=>document.getElementById(id);
+window.setT=function(t){
+ const hookEnd=TL[0][1], ctaStart=TL[5][0], folStart=TL[6][0];
+ const toRow=E(hookEnd-0.55,hookEnd,t);
+ const line=E(ctaStart-0.1,ctaStart+0.55,t); // line up bigger
+ let focus=-1,fw=0;
+ for(let k=0;k<4;k++){const a=TL[k+1][0]-0.12,b=TL[k+1][1]+0.05;const w=E(a,a+0.45,t)*(1-E(b,b+0.3,t));if(w>fw){fw=w;focus=k}}
+ ICON.forEach((o,i)=>{
+  const intro=Eb(0,0.85,t-i*0.08);
+  const S=STACK[i];
+  const fl=Math.sin(t*1.6+i*1.7)*0.06;
+  let x=lerp(S[0],ROWX[i],toRow),y=lerp(S[1],ROWY,toRow)+fl*(1-toRow),z=lerp(S[2],0,toRow),sc=lerp(1.0,ROWS,toRow),rz=lerp(S[3],0,toRow),ry=lerp(S[4],0,toRow)+Math.sin(t*1.1+i)*0.08*(1-toRow);
+  // line-up bigger row
+  x=lerp(x,ROWX[i]*0.93,line);y=lerp(y,0.7,line);sc=lerp(sc,0.62,line);
+  const f=(i===focus)?fw:0;
+  x=lerp(x,FOC.x,f);y=lerp(y,FOC.y,f);z=lerp(z,FOC.z,f);sc=lerp(sc,FOC.s,f);
+  ry=lerp(ry,(i===focus?Math.PI*2*E(0,1,f):0),f);rz=lerp(rz,0,f);
+  // intro from depth
+  sc*=lerp(0.6,1,Math.min(1,intro));z-=(1-Math.min(1,intro))*2;
+  o.g.position.set(x,y,z);o.g.scale.setScalar(sc);o.g.rotation.set(0.0,ry,rz);
+  const dim=(focus>=0&&i!==focus)?1:0;const dm=lerp(1,0.6,toRow*(focus>=0?E(0,1,fw):0)*dim);
+  o.mat.opacity=dm;o.sm.opacity=dm;
+ });
+ // hl
+ const hl=$('hl');hl.style.opacity=1-E(hookEnd+0.0,hookEnd+0.35,t);hl.style.transform=`translateY(${-60*E(hookEnd,hookEnd+0.35,t)}px)`;
+ // card
+ let ck=-1;for(let k=0;k<4;k++){if(t>=TL[k+1][0]-0.1&&t<TL[k+1][1]+0.2)ck=k}
+ const cd=$('card');
+ if(ck>=0){const a=TL[ck+1][0]-0.1;const w=E(a,a+0.25,t);const o=Math.min(w,1-E(TL[ck+1][1]+0.05,TL[ck+1][1]+0.2,t));cd.style.opacity=o;cd.style.transform=`translateY(${(1-w)*60}px)`;$('cno').textContent=CARD[ck][0]+' / 04';$('cnm').textContent=CARD[ck][1];$('cds').textContent=CARD[ck][2]}else cd.style.opacity=0;
+ // title during list: small headline
+ const cta=$('cta');const ca=E(ctaStart-0.05,ctaStart+0.25,t)*(1-E(folStart-0.1,folStart+0.1,t));cta.style.opacity=ca;cta.style.transform=`scale(${0.85+0.15*Eb(ctaStart,ctaStart+0.4,t)})`;
+ const fol=$('fol');const fa=E(folStart-0.05,folStart+0.25,t);fol.style.opacity=fa;fol.style.transform=`translateY(${(1-fa)*40}px)`;
+ // bg drift
+ $('bg').style.background=`radial-gradient(900px 900px at ${30+20*Math.sin(t*.5)}% ${25+8*Math.cos(t*.4)}%,rgba(222,251,10,.16),transparent 62%),radial-gradient(800px 800px at ${75-15*Math.sin(t*.4)}% 85%,rgba(222,251,10,.10),transparent 60%)`;
+ renderer.render(scene,cam);
+};
+setT(0);window.ready=true;
+</script>

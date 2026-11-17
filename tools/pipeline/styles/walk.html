@@ -1,0 +1,114 @@
+<!doctype html><meta charset="utf-8">
+<style>
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;font-family:Inter,sans-serif;background:#0B0B0B}
+#bg{position:absolute;inset:0}
+#stage{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:0 0;transform:translate(97px,181px) scale(0.82)}
+#brand{position:absolute;top:84px;left:0;width:1080px;text-align:center;font:700 34px Inter;letter-spacing:6px;color:#fff;opacity:.85}
+#brand b{display:inline-block;width:16px;height:16px;border-radius:50%;background:#DEFB0A;margin-right:14px;vertical-align:middle}
+#hl{position:absolute;top:150px;left:40px;width:1000px;text-align:center;font:400 140px/0.98 Anton;color:#fff;text-transform:uppercase;transform-origin:50% 0}
+#hl em{font-style:normal;color:#DEFB0A}
+#win{position:absolute;left:70px;top:600px;width:940px;height:900px;border-radius:36px;background:#11130d;border:2px solid rgba(222,251,10,.28);box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 80px rgba(222,251,10,.10);overflow:hidden}
+#bar{position:absolute;left:0;top:0;width:100%;height:64px;background:#0B0B0B;border-bottom:1px solid #23261a;z-index:5}
+#bar i{position:absolute;top:24px;width:16px;height:16px;border-radius:50%;background:#3a3d2e}
+#bar span{position:absolute;left:0;width:100%;text-align:center;top:18px;font:600 24px Inter;color:#9fa391;letter-spacing:2px}
+#cam{position:absolute;left:0;top:0;width:940px;height:900px;transform-origin:0 0}
+.lab{position:absolute;left:30px;font:700 22px 'DejaVu Sans Mono',monospace;color:#9fa391;letter-spacing:4px}
+.row{position:absolute;left:30px;width:880px;height:80px;border-radius:22px;background:#1b1e14;border:2px solid #272a1c}
+.row .av{position:absolute;left:18px;top:14px;width:52px;height:52px;border-radius:50%;background:#2a2e1a;color:#DEFB0A;font:700 24px/52px Inter;text-align:center}
+.row .nm{position:absolute;left:92px;top:12px;font:700 30px Inter;color:#fff}
+.row .nc{position:absolute;left:92px;top:46px;font:500 22px Inter;color:#9fa391}
+.row .tg{position:absolute;right:22px;top:22px;font:700 20px Inter;color:#cfd2c4;border:2px solid #3a3d2e;border-radius:99px;padding:6px 16px}
+#r0.sel{border-color:#DEFB0A;background:#222611;box-shadow:0 0 0 6px rgba(222,251,10,.18),0 0 40px rgba(222,251,10,.3)}
+#r0.sel .tg{background:#DEFB0A;color:#0B0B0B;border-color:#DEFB0A}
+#msg{position:absolute;left:30px;top:470px;width:880px;height:170px;border-radius:22px;background:#1b1e14;border:2px solid #272a1c;box-sizing:border-box;padding:26px 30px;font:500 34px/1.35 Inter;color:#fff}
+#msg.on{border-color:#DEFB0A;box-shadow:0 0 0 6px rgba(222,251,10,.18),0 0 40px rgba(222,251,10,.3)}
+#msg u{display:inline-block;width:3px;height:34px;background:#DEFB0A;vertical-align:-6px;margin-left:2px;text-decoration:none}
+.chip{position:absolute;top:706px;height:72px;border-radius:99px;border:2px solid #3a3d2e;background:#1b1e14;font:700 28px/68px Inter;color:#cfd2c4;text-align:center}
+#c1{left:30px;width:230px}
+#c1.sel{background:#DEFB0A;color:#0B0B0B;border-color:#DEFB0A;box-shadow:0 0 40px rgba(222,251,10,.3)}
+#tg{position:absolute;left:300px;top:706px;width:340px;height:72px;font:700 28px/72px Inter;color:#cfd2c4}
+#tg .sw{position:absolute;right:0;top:12px;width:100px;height:48px;border-radius:99px;background:#3a3d2e}
+#tg .sw i{position:absolute;left:5px;top:5px;width:38px;height:38px;border-radius:50%;background:#fff}
+#tg.on .sw{background:#DEFB0A}#tg.on .sw i{left:57px;background:#0B0B0B}
+#send{position:absolute;left:600px;top:810px;width:310px;height:74px;border-radius:22px;background:#DEFB0A;color:#0B0B0B;font:400 40px/78px Anton;text-align:center;text-transform:uppercase;letter-spacing:2px}
+#send.done{background:#fff}
+#cur{position:absolute;left:0;top:0;width:46px;height:46px;z-index:9}
+#rip{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:5px solid #DEFB0A;opacity:0;z-index:8}
+#toast{position:absolute;left:50%;top:50%;margin:-70px 0 0 -230px;width:460px;height:140px;border-radius:30px;background:#DEFB0A;color:#0B0B0B;font:400 64px/140px Anton;text-align:center;text-transform:uppercase;opacity:0;z-index:7;box-shadow:0 20px 80px rgba(0,0,0,.6)}
+#pill{position:absolute;left:70px;top:1530px;height:96px;padding:0 40px 0 14px;border-radius:99px;background:#0B0B0B;border:2px solid rgba(222,251,10,.6);display:flex;align-items:center;font:700 38px Inter;color:#fff;opacity:0}
+#pill b{width:68px;height:68px;border-radius:50%;background:#DEFB0A;color:#0B0B0B;font:400 44px/70px Anton;text-align:center;margin-right:22px}
+#cta{position:absolute;left:90px;width:900px;top:760px;opacity:0;text-align:center}
+#cta .c{display:inline-block;background:#DEFB0A;color:#0B0B0B;font:400 112px/1 Anton;text-transform:uppercase;padding:34px 56px 30px;border-radius:44px}
+#cta .c em{font-style:normal;text-decoration:underline;text-decoration-thickness:8px}
+#fol{position:absolute;left:90px;width:900px;top:790px;opacity:0;text-align:center}
+#fol .p{display:inline-block;background:#DEFB0A;color:#0B0B0B;font:400 104px/1 Anton;text-transform:uppercase;padding:30px 70px 26px;border-radius:999px}
+#fol .m{font:700 46px Inter;color:#fff;margin-top:34px}
+#fol .m2{font:600 40px Inter;color:#9fa391;margin-top:10px}
+</style>
+<div id="bg"></div>
+<div id="stage">
+<div id="brand"><b></b>RECLAIVO</div>
+<div id="hl">Pitch a creator in <em>4 clicks</em></div>
+<div id="win"><div id="bar"><i style="left:26px"></i><i style="left:54px"></i><i style="left:82px;background:#DEFB0A"></i><span>DEAL BOARD</span></div>
+<div id="cam">
+<div class="lab" style="top:92px">1  CREATOR</div>
+<div class="row" id="r0" style="top:132px"><div class="av">M</div><div class="nm">Maya</div><div class="nc">Tech and app reviews</div><div class="tg">Fits</div></div>
+<div class="row" style="top:224px"><div class="av">J</div><div class="nm">Jordan</div><div class="nc">Fitness routines</div><div class="tg">Maybe</div></div>
+<div class="row" style="top:316px"><div class="av">S</div><div class="nm">Sam</div><div class="nc">Home cooking</div><div class="tg">Maybe</div></div>
+<div class="lab" style="top:424px">2  MESSAGE</div>
+<div id="msg"><span id="mt"></span><u></u></div>
+<div class="lab" style="top:664px">3  OFFER</div>
+<div class="chip" id="c1">1 Reel</div>
+<div id="tg">Paid post<div class="sw"><i></i></div></div>
+<div id="send">Send</div>
+<div id="toast">Sent</div>
+<div id="rip"></div>
+<svg id="cur" viewBox="0 0 24 24"><path d="M3 2l16 9-7 2-3 7z" fill="#fff" stroke="#0B0B0B" stroke-width="1.6" stroke-linejoin="round"/></svg>
+</div></div>
+<div id="pill"><b id="pn">1</b><span id="pt"></span></div>
+<div id="cta"><span class="c">Comment <em>DEAL</em> below</span></div>
+<div id="fol"><div class="p">Follow</div><div class="m">then DM us or email us</div><div class="m2">hello@reclaivo.com</div></div>
+</div>
+<script>
+(async()=>{
+const TL=(await (await fetch('/walk_tl.json')).json()).tl;
+const E=(a,b,x)=>{const t=Math.min(1,Math.max(0,(x-a)/(b-a)));return t*t*(3-2*t)};
+const L=(a,b,t)=>a+(b-a)*t;
+const $=id=>document.getElementById(id);
+const hookEnd=TL[0][1],s=[1,2,3,4].map(k=>TL[k][0]);
+const TXT="Loved your video on editing apps.";
+// cursor keyframes [t,x,y]
+const K=[[0,800,60],[s[0]+0.1,800,60],[s[0]+0.85,470,172],[s[1]+0.1,470,172],[s[1]+0.7,420,540],[s[1]+2.3,420,540],[s[2]+0.15,420,540],[s[2]+0.65,145,742],[s[2]+0.9,145,742],[s[2]+1.45,560,742],[s[3]-0.45,560,742],[s[3]+0.2,760,846],[99,760,846]];
+function cur(t){for(let i=0;i<K.length-1;i++){const a=K[i],b=K[i+1];if(t>=a[0]&&t<=b[0]){const e=E(a[0],b[0],t);return[L(a[1],b[1],e),L(a[2],b[2],e)]}}return[K[K.length-1][1],K[K.length-1][2]]}
+const clicks=[s[0]+0.85,s[1]+0.7,s[2]+0.65,s[2]+1.45,s[3]+0.2];
+// camera focus [t,fx,fy,scale]
+const C=[[0,470,450,1],[s[0]-0.1,470,230,1.25],[s[1]-0.15,470,520,1.25],[s[2]-0.15,470,742,1.25],[s[3]-0.55,640,790,1.3],[s[3]+1.4,470,450,1.0]];
+function cam(t){let i=0;for(let j=0;j<C.length;j++)if(t>=C[j][0])i=j;const p=C[Math.max(0,i-1)],c=C[i];const w=E(c[0],c[0]+0.6,t);return[L(p[1],c[1],w),L(p[2],c[2],w),L(p[3],c[3],w)]}
+window.setT=function(t){
+ const [fx,fy,sc]=cam(t);$('cam').style.transform=`translate(${470-fx*sc}px,${450-fy*sc}px) scale(${sc})`;
+ const [cx,cy]=cur(t);$('cur').style.left=cx+'px';$('cur').style.top=cy+'px';
+ let rp=0,rx=0,ry=0;clicks.forEach(c=>{const d=t-c;if(d>=0&&d<0.5){rp=d/0.5;[rx,ry]=cur(c)}});
+ const rip=$('rip');rip.style.opacity=rp?1-rp:0;rip.style.left=rx+'px';rip.style.top=ry+'px';rip.style.transform=`scale(${1+rp*3.5})`;
+ // state
+ $('r0').className='row'+(t>=clicks[0]?' sel':'');
+ const typing=E(s[1]+0.8,s[1]+2.2,t);const n=Math.floor(typing*TXT.length);$('mt').textContent=TXT.slice(0,n);
+ $('msg').className=(t>=clicks[1]?'on':'');
+ $('c1').className='chip'+(t>=clicks[2]?' sel':'');$('tg').className=(t>=clicks[3]?'on':'');
+ $('send').className=(t>=clicks[4]?'done':'');$('send').textContent=t>=clicks[4]?'Sent':'Send';
+ const ta=E(clicks[4]+0.05,clicks[4]+0.3,t)*(1-E(TL[5][0]-0.25,TL[5][0]-0.05,t));$('toast').style.opacity=ta;$('toast').style.transform=`scale(${0.8+0.2*ta})`;
+ // hook headline
+ const hl=$('hl');const hs=E(hookEnd,hookEnd+0.4,t);hl.style.transform=`translateY(${0*hs}px) scale(${1-0.5*hs})`;hl.style.opacity=1-E(TL[5][0]-0.2,TL[5][0]+0.05,t);
+ // window
+ const wa=E(0.35,0.9,t)*(1-E(TL[5][0]-0.35,TL[5][0]-0.05,t));const w=$('win');w.style.opacity=wa;w.style.transform=`translateY(${(1-E(0.35,1.0,t))*60+(hs*-100)}px) scale(${1+0.1*hs})`;
+ // step pill
+ let sk=-1;for(let k=0;k<4;k++)if(t>=s[k]-0.1&&t<TL[k+1][1]+0.5)sk=k;
+ const NAMES=['Pick a creator','Name one video','State the offer','Send it'];
+ const pl=$('pill');if(sk>=0){$('pn').textContent=sk+1;$('pt').textContent=NAMES[sk];pl.style.opacity=E(s[sk]-0.1,s[sk]+0.15,t)*(1-E(TL[5][0]-0.3,TL[5][0]-0.1,t))}else pl.style.opacity=0;
+ const ctaS=TL[5][0],folS=TL[6][0];
+ const cta=$('cta');const ca=E(ctaS-0.05,ctaS+0.25,t)*(1-E(folS-0.1,folS+0.1,t));cta.style.opacity=ca;cta.style.transform=`scale(${0.85+0.15*ca})`;
+ const fol=$('fol');const fa=E(folS-0.05,folS+0.25,t);fol.style.opacity=fa;fol.style.transform=`translateY(${(1-fa)*40}px)`;
+ $('bg').style.background=`radial-gradient(900px 900px at ${30+20*Math.sin(t*.5)}% ${30+8*Math.cos(t*.4)}%,rgba(222,251,10,.14),transparent 62%),radial-gradient(800px 800px at ${75-15*Math.sin(t*.4)}% 85%,rgba(222,251,10,.08),transparent 60%)`;
+};
+document.fonts.ready.then(()=>{setT(0);window.ready=true});
+})();
+</script>
