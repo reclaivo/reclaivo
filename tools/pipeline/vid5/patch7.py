@@ -24,7 +24,7 @@ for R in RE:
     # chips list
     i=s.index('chips=');j=s.index('\n',i)
     s=s[:i]+"chips=''.join(f'<div class=\"chip\" data-t=\"{t}\" data-r=\"{r}\" style=\"left:{x}px;top:{y}px\">{txt}</div>' for txt,t,x,y,r in "+repr(c['chips'])+")"+s[j:]
-    s=rep(s,'>ZERO?</div>','>'+c['ad']+'</div>')
+    s=rep(s,'id="ad">ZERO?</div>','id="ad" style="font-size:%dpx">%s</div>'%(min(400,int(400*5/max(len(c['ad']),5)*0.97)),c['ad']))
     # backgrounds
     s=rep(s,"</div>','studio')\nb1","</div>','"+c['bg'][0]+"')\nb1")
     s=rep(s,"</div>','desk')\nb3","</div>','"+c['bg'][1]+"')\nb3")
