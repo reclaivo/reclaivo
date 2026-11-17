@@ -5,7 +5,7 @@ P="$(cd "$(dirname "$0")" && pwd)"
 mkdir -p /tmp/vid2 /tmp/t3d/char /tmp/vid5 /tmp/tts
 cp "$P/vid2/build4.py" /tmp/vid2/; rm -rf /tmp/vid2/img; cp -r "$P/vid2/img" /tmp/vid2/img
 cp "$P"/t3d/{audio_t.py,insert.html,ins.py,package.json} /tmp/t3d/; cp "$P/t3d/char/pose5.png" /tmp/t3d/char/
-cp "$P"/vid5/{patch7.py,music.py,composem.sh,composep.sh} /tmp/vid5/; chmod +x /tmp/vid5/*.sh
+cp "$P"/vid5/{patch7.py,music.py,composem.sh,composep.sh,add_cover.sh} /tmp/vid5/; chmod +x /tmp/vid5/*.sh
 cp "$P/tts/tts2.py" /tmp/tts/
 mkdir -p /mnt/user-data/outputs/reclaivo-ima/images; cp "$P"/site-img/*.jpg /mnt/user-data/outputs/reclaivo-ima/images/
 pip install -q --break-system-packages sherpa-onnx numpy scipy soundfile pillow playwright 2>&1 | tail -1 || true

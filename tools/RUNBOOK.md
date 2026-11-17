@@ -21,6 +21,9 @@ Owner: Abyan. Goal: new Instagram Reels and LinkedIn videos about ONLY influence
 - Until Thu 26 Nov 2026 (Zapier trial): 2 reels per day, 12:00 and 19:00 UK.
 - From Fri 27 Nov 2026: 1 reel per day at 19:00 UK, 6 days a week, Sunday is the day off.
 
+## Cover frame
+make_week.py already makes frame 0 the designed cover (hook fully shown) via add_cover.sh, so Reels uses it as the thumbnail. Never skip this step; a .cover.png is saved next to each reel.
+
 ## Building (Friday 16:30 task)
 1. `bash tools/pipeline/setup.sh` (rebuilds the workspace, downloads the voice model from GitHub). Then `pip` and playwright chromium are already present; if not, `python3 -m playwright install chromium`.
 2. Read tools/schedule.md and tools/history.json. Work out how many reels are needed to fill every slot from the first unfilled slot through the end of the coming Saturday (cadence above), minus reels already built but unscheduled. Build the shortfall.

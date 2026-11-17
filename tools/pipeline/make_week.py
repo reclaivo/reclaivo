@@ -43,6 +43,7 @@ for n,r in S.items():
         sh(f'python3 music.py {n}',W); sh(f'./composem.sh {n}',W)
     f=f'{d}/final_m.mp4'; t=dur(f)
     assert 5<t<=15.0, f'{n} duration {t}'
-    shutil.copy(f,fin); print('OK',n,round(t,1),flush=True)
+    sh(f'/tmp/vid5/add_cover.sh {f} {fin} 0.9')
+    print('OK',n,round(t,1),flush=True)
 if srv: srv.terminate()
 print('ALL_DONE')
