@@ -34,12 +34,12 @@ make_week.py already makes frame 0 the designed cover (hook fully shown) via add
 5. Check one frame sheet of every 3D reel (ffmpeg tile) for overlaps, and durations are under 15 s (the script enforces). Fix and rebuild if wrong.
 6. Copy finals to reels/<week folder>/NAME.mp4, update tools/history.json (new ids and topics) and tools/schedule.md (status "built"), commit and push (`git -c push.negotiate=true push origin HEAD:main`). Commit messages end with the Co-Authored-By line the session gives.
 
-## Scheduling (Friday evening task and Tuesday top-up)
+## Scheduling (done in the same session as the build)
 - Read tools/schedule.md. For each built-but-unscheduled reel, in order, upload and create_post to both accounts at the next free slot (cadence). Stop at the 10 limit. Write captions (unique, SEO, rules above). Update tools/schedule.md and push.
 - Check with find_media / the create_post result for failures, retry once, report plainly if anything fails.
 
-## Saturday check
-- Confirm Friday's reels were built and scheduled (tools/schedule.md plus the repo). If not, run the missing part now.
+## Task timing (changed 18 Nov 2026)
+There is ONE scheduled task, a one-shot that re-arms itself. It builds and schedules in the same session, then sets its own next run to 16:30 UK two days before the last scheduled slot (tomorrow 10:07 UK if a run failed). No fixed weekly tasks, no separate Saturday or Tuesday checks. If FREE slots (10 minus pending) is 3 or less it skips building and only re-arms.
 
 
 ## New styles (added 17 Nov 2026): Glass Icons and Software Walkthrough
