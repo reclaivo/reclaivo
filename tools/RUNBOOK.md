@@ -12,7 +12,7 @@ Owner: Abyan. Goal: new Instagram Reels and LinkedIn videos about ONLY influence
 
 ## Accounts (use the main Zapier connector only, NEVER ZapierP; Publer workspace 6af9e64d1740237b1ce4e8ee, Zapier app App232404CLIAPI, connection hello@reclaivo.com)
 - Instagram 6af9e69b1fc93c847bd2b4a8, LinkedIn 6af9f7961740237b1ce51c0a.
-- Post to BOTH in ONE create_post call: account_ids = both ids (one Zapier task). Upload each video once (upload_media, one video per call, file_urls = raw GitHub URL, in_library true), reuse the media id.
+- Post to BOTH in ONE create_post call: account_ids = both ids (one Zapier task). Upload each video once (upload_media, one video per call, file_urls = jsDelivr URL https://cdn.jsdelivr.net/gh/reclaivo/reclaivo@main/<path>.mp4 (NEVER raw.githubusercontent.com: it serves application/octet-stream and Publer rejects it with 'not a publicly accessible media'; if the first jsDelivr fetch of a brand new file fails, retry the same URL once, it works the second time), in_library true), reuse the media id.
 - state must be "scheduled" (drafts never show). scheduled_at is ISO UTC (UK is UTC+0 in winter, UTC+1 in summer).
 - Publer free plan: max 10 scheduled posts per account. If the limit error appears, stop, leave the rest for the next run. Never delete the user's posts.
 - Each reel costs 2 Zapier tasks (upload + post). Zapier free plan is 100 tasks a month.

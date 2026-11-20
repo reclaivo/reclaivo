@@ -18,6 +18,11 @@
 | E18 | Tue 24 Nov 12:00 | built |
 | E19 | Tue 24 Nov 19:00 | built |
 | E20 | Wed 25 Nov 12:00 | built |
-Videos for E14 to E20 are in reels/week-3/. Styles: E14 Glass, E15 2D, E16 Walkthrough (promo), E17 Glass, E18 2D, E19 Walkthrough, E20 Glass (promo). Earlier posts E1 to E13 went out. Next free slot after Wed 25 Nov 12:00: Wed 25 Nov 19:00 (2 per day until Thu 26 Nov, then 1 per day at 19:00 UK, Sunday off).
-
-Note 20 Nov: E14 to E20 are built and pushed but NOT scheduled. Publer upload_media failed for every raw.githubusercontent.com URL (even the known good week-2 cover file) with 'not a publicly accessible media'. Next run must skip building, only upload and schedule E14 to E20 (captions in tools/caps-week-3.json, slots in the table above).
+Videos for E14 to E20 are in reels/week-3/. Styles: E14 Glass, E15 2D, E16 Walkthrough (promo), E17 Glass, E18 2D, E19 Walkthrough, E20 Glass (promo). | E14 | Sun 22 Nov 12:00 | scheduled |
+| E15 | Sun 22 Nov 19:00 | scheduled |
+| E16 | Mon 23 Nov 12:00 | scheduled |
+| E17 | Mon 23 Nov 19:00 | scheduled |
+| E18 | Tue 24 Nov 12:00 | scheduled |
+| E19 | Tue 24 Nov 19:00 | scheduled |
+| E20 | Wed 25 Nov 12:00 | scheduled (create_post timed out, then the retry hit the 10 per account cap, so it almost certainly succeeded; verify in Publer) |
+Earlier posts (E1, E2, E4) went out or were removed by the owner. Queue is FULL (10 per account) until posts go live. Next free slot after Wed 25 Nov 12:00: Wed 25 Nov 19:00 (2 per day until Thu 26 Nov, then 1 per day at 19:00 UK, Sunday off).
