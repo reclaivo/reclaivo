@@ -11,4 +11,11 @@
 | E7 | Fri 20 Nov 19:00 | scheduled |
 | E10 | Sat 21 Nov 12:00 | scheduled |
 | E13 | Sat 21 Nov 19:00 | scheduled |
-Earlier posts (E1, E2, E4) went out or were removed by the owner. Queue is full (10 per account). Next free slot after Sat 21 Nov 19:00: Sun 22 Nov 12:00 (until Thu 26 Nov at 2 per day, then 1 per day at 19:00 UK, Sunday off).
+| E14 | Sun 22 Nov 12:00 | built |
+| E15 | Sun 22 Nov 19:00 | built |
+| E16 | Mon 23 Nov 12:00 | built |
+| E17 | Mon 23 Nov 19:00 | built |
+| E18 | Tue 24 Nov 12:00 | built |
+| E19 | Tue 24 Nov 19:00 | built |
+| E20 | Wed 25 Nov 12:00 | built |
+Videos for E14 to E20 are in reels/week-3/. Styles: E14 Glass, E15 2D, E16 Walkthrough (promo), E17 Glass, E18 2D, E19 Walkthrough, E20 Glass (promo). Earlier posts E1 to E13 went out. Next free slot after Wed 25 Nov 12:00: Wed 25 Nov 19:00 (2 per day until Thu 26 Nov, then 1 per day at 19:00 UK, Sunday off).
