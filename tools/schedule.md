@@ -26,3 +26,5 @@ Videos for E14 to E20 are in reels/week-3/. Styles: E14 Glass, E15 2D, E16 Walkt
 | E19 | Tue 24 Nov 19:00 | scheduled |
 | E20 | Wed 25 Nov 12:00 | scheduled (create_post timed out, then the retry hit the 10 per account cap, so it almost certainly succeeded; verify in Publer) |
 Earlier posts (E1, E2, E4) went out or were removed by the owner. Queue is FULL (10 per account) until posts go live. Next free slot after Wed 25 Nov 12:00: Wed 25 Nov 19:00 (2 per day until Thu 26 Nov, then 1 per day at 19:00 UK, Sunday off).
+
+| E21 | Wed 25 Nov 19:00 | scheduled (2D, goal before price) |
