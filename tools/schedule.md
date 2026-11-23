@@ -29,3 +29,4 @@ Earlier posts (E1, E2, E4) went out or were removed by the owner. Queue is FULL 
 
 | E21 | Wed 25 Nov 19:00 | scheduled (2D, goal before price) |
 | E22 | Thu 26 Nov 12:00 | scheduled (Walkthrough, make an offer) |
+| E23 | Thu 26 Nov 19:00 | scheduled (Glass, media kit; create_post returned empty payload with no failures key, verify in Publer) |
