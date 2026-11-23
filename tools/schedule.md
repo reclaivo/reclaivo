@@ -30,3 +30,5 @@ Earlier posts (E1, E2, E4) went out or were removed by the owner. Queue is FULL 
 | E21 | Wed 25 Nov 19:00 | scheduled (2D, goal before price) |
 | E22 | Thu 26 Nov 12:00 | scheduled (Walkthrough, make an offer) |
 | E23 | Thu 26 Nov 19:00 | scheduled (Glass, media kit; create_post returned empty payload with no failures key, verify in Publer) |
+| E24 | Fri 27 Nov 19:00 | scheduled (2D promo) |
+Next free slot: Sat 28 Nov 19:00 (1 per day at 19:00 UK, Sunday off). Note: scheduler update_trigger was refused in the 23 Nov run (needs user approval), next run time must be set by Abyan. Pipeline note: build5.py needs a logo_path.txt in a stale scratchpad path (recreated from tools/logo.svg), and the http.server on 8123 must be started with setsid before make_style.
